@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
             {
                 canJump = false;
                 velocity *= 0.2f;
-                velocity += new Vector2(0, 8).RotatedBy(jumpDegrees);
+                velocity += new Vector2(0, 10).RotatedBy(jumpDegrees);
             }
         }
         bool moveLeft = Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D);
@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
                 {
                     rb2.gravityScale = 1.0f;
                     rb2.velocity *= 0.1f;
-                    rb2.velocity += toMouse * 2.1f;
+                    rb2.velocity += toMouse.normalized * scale * 6.1f;
                     justLaunchedBoulder = 100;
                 }
                 else
