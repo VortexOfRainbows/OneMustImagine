@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private Camera mainCamera;
+    [SerializeField] private GameObject boulder;
+    [SerializeField] private GameObject arrow;
     private Rigidbody2D rb;
     void Start()
     {
@@ -21,6 +20,7 @@ public class Player : MonoBehaviour
     private bool canJump = true;
     private bool touchingGround = false;
     private float jumpDegrees = 0;
+    private float justLaunchedBoulder = 0;
     [SerializeField] private float verticalAdjustmentMult = 2f;
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+    private bool lastMouseState;
     private void FixedUpdate()
     {
         Vector2 velocity = rb.velocity;
@@ -124,9 +125,44 @@ public class Player : MonoBehaviour
         }
         //rotation -= summedDirection.x * 15;
         //velocity += summedDirection;
-
+        arrow.SetActive(false);
+        if (Vector2.Distance(transform.position, boulder.transform.position) < 1.1f)
+        {
+            Rigidbody2D rb2 = boulder.GetComponent<Rigidbody2D>();
+            bool releaseMouse = lastMouseState && !Input.GetMouseButton(0);
+            if (Input.GetMouseButton(0) || releaseMouse)
+            {
+                float maxDistance = 5;
+                Vector2 toMouse = (Vector2)(mainCamera.ScreenToWorldPoint(Input.mousePosition) - boulder.transform.position);
+                float scale = toMouse.magnitude;
+                scale = Mathf.Min(scale, maxDistance);
+                if(releaseMouse)
+                {
+                    rb2.gravityScale = 1.0f;
+                    rb2.velocity *= 0.1f;
+                    rb2.velocity += toMouse * 2.1f;
+                    justLaunchedBoulder = 100;
+                }
+                else
+                {
+                    arrow.SetActive(true);
+                    arrow.transform.localScale = new Vector3(arrow.transform.localScale.x, scale, arrow.transform.localScale.z);
+                    arrow.transform.position = (Vector2)boulder.transform.position + toMouse.normalized * scale * 0.5f;
+                    arrow.transform.rotation = (toMouse.ToRotation() - Mathf.PI / 2).ToQuaternion();
+                }
+            }
+            if (justLaunchedBoulder <= 0 && Input.GetMouseButton(1) && !releaseMouse && Vector2.Distance(transform.position, boulder.transform.position) < 1.05f)
+            {
+                rb2.gravityScale = 1.0f;
+                Vector2 velocityToContribute = rb.velocity;
+                velocityToContribute.y *= 0.1f;
+                rb2.MovePosition((Vector2)boulder.transform.position + velocityToContribute * Time.fixedDeltaTime);
+            }
+        }
+        justLaunchedBoulder--;
         rb.velocity = velocity;
         rb.rotation = rotation;
         touchingGround = false;
+        lastMouseState = Input.GetMouseButton(0);
     }
 }
