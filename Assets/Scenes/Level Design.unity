@@ -725,7 +725,7 @@ Transform:
   m_GameObject: {fileID: 288408561}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.429993, y: 49.54, z: 10}
+  m_LocalPosition: {x: -18.57, y: -7.08, z: 10}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1849,7 +1849,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.7, z: -10}
+  m_LocalPosition: {x: -21.17, y: -8.48, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5109,7 +5109,7 @@ Transform:
   m_GameObject: {fileID: 1005248724}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32, y: 49.5, z: 1}
+  m_LocalPosition: {x: -26.96, y: -7.57, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5349,7 +5349,7 @@ Transform:
   m_GameObject: {fileID: 1028581598}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 32.48, y: 51.49, z: 0}
+  m_LocalPosition: {x: -18.519993, y: -5.129998, z: 0}
   m_LocalScale: {x: 0.2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8128,7 +8128,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'you are sussyphus
+  m_Text: 'you are sisyphus
 
     move with wasd :O'
 --- !u!222 &1781986327
