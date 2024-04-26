@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject boulder;
     [SerializeField] private GameObject arrow;
+    [SerializeField] private GameObject jumpCollider;
     private Rigidbody2D rb;
     void Start()
     {
@@ -21,28 +22,21 @@ public class Player : MonoBehaviour
     private bool touchingGround = false;
     private float jumpDegrees = 0;
     private float justLaunchedBoulder = 0;
-    [SerializeField] private float verticalAdjustmentMult = 2f;
     private void OnCollisionStay2D(Collision2D collision)
     {
         touchingGround = true;
-        if(collision.otherCollider.CompareTag("JumpCollider"))
-        {
-            if (rb.velocity.y <= 0)
-            {
-                canJump = true;
-            }
-        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         touchingGround = true;
-        if (collision.otherCollider.CompareTag("JumpCollider"))
+    }
+    public void RefreshJump()
+    {
+        if (rb.velocity.y <= 0)
         {
-            if (rb.velocity.y <= 0)
-            {
-                canJump = true;
-            }
+            canJump = true;
         }
+        touchingGround = true;
     }
     private bool lastMouseState;
     private void FixedUpdate()
@@ -50,9 +44,14 @@ public class Player : MonoBehaviour
         Vector2 velocity = rb.velocity;
         float rotation = rb.rotation;
         if (touchingGround)
+        {
             velocity.x *= 0.9f;
+        }
         else
+        {
             velocity.x *= 0.95f;
+            canJump = false;
+        }
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space))
         {
             if (canJump && touchingGround)
@@ -106,15 +105,15 @@ public class Player : MonoBehaviour
             {
                 moveCounter += (0.3f + 4.0f * sin) * dir;
             }
-            if (touchingGround)
-                velocity.y -= 0.5f;
+            //if (touchingGround)
+            //    velocity.y -= 0.5f;
         }
         else
         {
             rb.freezeRotation = false;
         }
-        if (touchingGround)
-            velocity.y -= 1.0f;
+        //if (touchingGround)
+        //    velocity.y -= 1.0f;
         if (rb.velocity.y < 0)
         {
             rb.gravityScale += 0.01f;
