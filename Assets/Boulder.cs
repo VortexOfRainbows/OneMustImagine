@@ -21,17 +21,18 @@ public class Boulder : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 velocity = rb.velocity;
-        velocity.x *= 0.9825f;
         if(velocity.y > 0)
         {
             velocity.y *= 0.9825f;
         }
         if(touchingGround)
         {
+            velocity.x *= 0.99f;
             rb.gravityScale += 0.05f;
         }
         else
         {
+            velocity.x *= 0.9825f;
             rb.gravityScale = 1.0f;
         }
         rb.gravityScale = Mathf.Min(rb.gravityScale, 10);
