@@ -904,10 +904,10 @@ PolygonCollider2D:
   m_Material: {fileID: 6200000, guid: 27ecef6bc5a812f4cb6abe9e3b041080, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -936,7 +936,7 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.6350946}
-      - {x: -0.55, y: -0.31753337}
-      - {x: 0.55, y: -0.31753337}
+    - - {x: 0, y: 0.7216984}
+      - {x: -0.625, y: -0.36083338}
+      - {x: 0.625, y: -0.36083338}
   m_UseDelaunayMesh: 0

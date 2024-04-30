@@ -51,7 +51,7 @@ public class BreakableBlock : MonoBehaviour
             }
             else
             {
-                breakPercent = breakPercent * breakPercent * PartialBreakMultiplier;
+                breakPercent = breakPercent * breakPercent * PartialBreakMultiplier * 0.5f;
                 BreakTimer += breakPercent * CrumbleTime;
                 BreakTimer += Time.deltaTime * 2; //Break slowly if the boulder is colliding but not high enough speed
                 if (BreakTimer > CrumbleTime)
@@ -72,7 +72,7 @@ public class BreakableBlock : MonoBehaviour
     [SerializeField]
     private float RespawnTime = 4f;
     [SerializeField]
-    private float CrumbleTime = 6f;
+    private float CrumbleTime = 7f;
     private bool Dead = false;
     private bool LastAliveState = false;
     private float ResTimer = 0;

@@ -273,7 +273,7 @@ MonoBehaviour:
   PartialBreakMultiplier: 0.2
   Respawnable: 1
   RespawnTime: 4
-  CrumbleTime: 6
+  CrumbleTime: 7
 --- !u!1 &745378130
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,13 +397,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 745378130}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.5180636, w: 0.8553421}
-  m_LocalPosition: {x: -11.92, y: 1.66, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.23375914, w: 0.97229457}
+  m_LocalPosition: {x: -13.5, y: -3.5, z: 0}
   m_LocalScale: {x: 36.8909, y: 11.7581, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -62.405}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -27.037}
 --- !u!1 &889084479
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,14 +435,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa8c53f286bff6439b8195f198368f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VelocityToBreak: 10
+  VelocityToBreak: 12
   VelocityPersistsAfterBreaking: 1
   Renderer: {fileID: 0}
   Collider: {fileID: 0}
-  PartialBreakMultiplier: 0.3
+  PartialBreakMultiplier: 0.2
   Respawnable: 1
   RespawnTime: 4
-  CrumbleTime: 5
+  CrumbleTime: 7
 --- !u!61 &889084481
 BoxCollider2D:
   m_ObjectHideFlags: 0
