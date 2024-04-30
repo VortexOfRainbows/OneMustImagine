@@ -70,6 +70,18 @@ public class BreakableBlock : MonoBehaviour
             }
         }
     }
+    private void GenerateParticles(bool regen = false, float particleMultiplier = 1f)
+    {
+        ParticleSystem module = Instantiate((regen ? RegenParticles.gameObject : BreakParticles.gameObject), transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+        ParticleSystem.MainModule main = module.main;
+        main.startColor = DefaultColor;
+        ParticleSystem.ShapeModule shape = module.shape;
+        shape.scale = transform.localScale;
+        shape.rotation = transform.eulerAngles;
+        module.emission.SetBurst(0, new ParticleSystem.Burst(0, (short)(DefaultParticleCount * particleMultiplier)));
+    }
+    [SerializeField]
+    private int DefaultParticleCount = 100;
     [SerializeField]
     private float PartialBreakMultiplier = 0.2f;
     [SerializeField]
@@ -121,18 +133,7 @@ public class BreakableBlock : MonoBehaviour
             float PercentBreak = currentBreakPercentage - PreviousBreakPercent;
             if(PercentBreak > 0)
             {
-                short count = (short)(100 * PercentBreak + 0.5f);
-                if(count > 0)
-                {
-                    //Spawn particles here relative to the change in break. This will effectively make particles spawn if the platform is damaged slightly by the boulder 
-                    ParticleSystem module = Instantiate(BreakParticles.gameObject, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
-                    ParticleSystem.MainModule main = module.main;
-                    main.startColor = DefaultColor;
-                    ParticleSystem.ShapeModule shape = module.shape;
-                    shape.scale = transform.localScale;
-                    shape.rotation = transform.eulerAngles;
-                    module.emission.SetBurst(0, new ParticleSystem.Burst(0, count));
-                }
+                GenerateParticles(particleMultiplier: PercentBreak + 0.95f / DefaultParticleCount);
             }
         }
         PreviousBreakPercent = BreakTimer / CrumbleTime;
@@ -145,12 +146,7 @@ public class BreakableBlock : MonoBehaviour
                 bool nowAbove = ResTimer >= RespawnTime - 0.2f;
                 if(wasBelow && nowAbove)
                 {
-                    ParticleSystem module = Instantiate(RegenParticles.gameObject, transform.position + new Vector3(0, 0, -3), Quaternion.identity).GetComponent<ParticleSystem>();
-                    ParticleSystem.MainModule main = module.main;
-                    main.startColor = DefaultColor;
-                    ParticleSystem.ShapeModule shape = module.shape;
-                    shape.scale = transform.localScale;
-                    shape.rotation = transform.eulerAngles;
+                    GenerateParticles(true, 1.25f);
                 }
             }
             if(ResTimer >= RespawnTime)
