@@ -534,6 +534,8 @@ MonoBehaviour:
   m_AfterStackBundles:
   - assemblyQualifiedName: EdgeDetection, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  - assemblyQualifiedName: CameraBlur, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &524029440
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +812,7 @@ MonoBehaviour:
   mainCamera: {fileID: 519420031}
   boulder: {fileID: 288408561}
   arrow: {fileID: 1028581598}
-  verticalAdjustmentMult: 2
+  jumpCollider: {fileID: 0}
 --- !u!212 &1005248726
 SpriteRenderer:
   m_ObjectHideFlags: 0

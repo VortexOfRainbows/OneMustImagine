@@ -17,24 +17,40 @@ public class Player : MonoBehaviour
         Vector2 lerp = Vector2.Lerp(mainCamera.transform.position, transform.position, 0.8f);
         mainCamera.transform.position = new Vector3(lerp.x, lerp.y, mainCamera.transform.position.z);
     }
+    private bool InTheAir => !touchingGround && !touchingWall;
     private float moveCounter = 0;
+    //private bool JustJumped = false;
     private bool canJump = true;
     private bool touchingGround = false;
+    private bool touchingWall = false;
     private float jumpDegrees = 0;
     private float justLaunchedBoulder = 0;
     private void OnCollisionStay2D(Collision2D collision)
     {
-        touchingGround = true;
+        if(!touchingGround)
+            touchingWall = true;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        touchingGround = true;
+        if (!touchingGround)
+            touchingWall = true;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!touchingGround)
+            touchingWall = true;
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!touchingGround)
+            touchingWall = true;
     }
     public void RefreshJump()
     {
         if (rb.velocity.y <= 0)
         {
             canJump = true;
+            rb.angularVelocity *= 0.0f;
         }
         touchingGround = true;
     }
@@ -56,6 +72,7 @@ public class Player : MonoBehaviour
         {
             if (canJump && touchingGround)
             {
+                //JustJumped = true;
                 canJump = false;
                 velocity *= 0.2f;
                 velocity += new Vector2(0, 10).RotatedBy(jumpDegrees);
@@ -65,7 +82,7 @@ public class Player : MonoBehaviour
         bool moveRight = !Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D);
         if (moveLeft)
         {
-            if(moveCounter == 0)
+            if(moveCounter == 0 && (touchingGround || !touchingWall))
                 moveCounter = 0.1f;
         }
         if (Input.GetKey(KeyCode.S))
@@ -74,14 +91,18 @@ public class Player : MonoBehaviour
         }
         if (moveRight)
         {
-            if (moveCounter == 0)
+            if (moveCounter == 0 && (touchingGround || !touchingWall))
                 moveCounter = -0.1f;
         }
-        if(!touchingGround)
+        if(InTheAir)
         {
-            if(!moveLeft && !moveRight)
+            if((!moveLeft && moveCounter > 0) || (!moveRight && moveCounter < 0))
             {
                 moveCounter = 0;
+            }
+            else if(moveCounter != 0)
+            {
+                moveCounter = 150 * Mathf.Sign(moveCounter);
             }
         }            
         if(moveCounter != 0)
@@ -89,41 +110,38 @@ public class Player : MonoBehaviour
             float dir = Mathf.Sign(moveCounter);
             float absCounter = Mathf.Abs(moveCounter);
             float sin = Mathf.Sin(absCounter / 120f * Mathf.PI);
-            if (!touchingGround)
+            if (InTheAir)
                 sin = 1;
-            velocity.x = sin * dir * -2.7f;
+            if (sin < 0)
+                sin = 0;
+            velocity.x = sin * dir * -3.6f;
             if(absCounter < 90)
                 rb.freezeRotation = true;
             else
                 rb.freezeRotation = false;
-            rotation += (0.3f + 4.0f * sin) * dir;
-            if (absCounter >= 120 && touchingGround)
+            float increment = (0.5f + 3.5f * sin) * dir;
+            rotation += increment;
+            if (absCounter >= 128 && !InTheAir)
             {
                 moveCounter = 0;
             }
             else
             {
-                moveCounter += (0.3f + 4.0f * sin) * dir;
+                moveCounter += increment;
             }
-            //if (touchingGround)
-            //    velocity.y -= 0.5f;
         }
         else
-        {
-            rb.freezeRotation = false;
+        { 
+            rb.freezeRotation = false; 
         }
-        //if (touchingGround)
-        //    velocity.y -= 1.0f;
         if (rb.velocity.y < 0)
         {
-            rb.gravityScale += 0.01f;
+            rb.gravityScale += 0.02f;
         }
         else
         {
-            rb.gravityScale = 1;
+            rb.gravityScale = 2;
         }
-        //rotation -= summedDirection.x * 15;
-        //velocity += summedDirection;
         arrow.SetActive(false);
         if (Vector2.Distance(transform.position, boulder.transform.position) < 1.1f)
         {
@@ -157,11 +175,11 @@ public class Player : MonoBehaviour
                 velocityToContribute.y *= 0.1f;
                 rb2.MovePosition((Vector2)boulder.transform.position + velocityToContribute * Time.fixedDeltaTime);
             }
-        }
+        };
         justLaunchedBoulder--;
         rb.velocity = velocity;
         rb.rotation = rotation;
-        touchingGround = false;
+        touchingGround = touchingWall = false;
         lastMouseState = Input.GetMouseButton(0);
     }
 }

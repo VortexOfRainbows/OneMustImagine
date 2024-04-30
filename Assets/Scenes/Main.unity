@@ -123,6 +123,59 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &147731507 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8159095311175814412, guid: 611e9554852e094438c2fed706498556, type: 3}
+  m_PrefabInstance: {fileID: 1735260868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &147731513
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147731507}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 27ecef6bc5a812f4cb6abe9e3b041080, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.28866667}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 0.6350946}
+      - {x: -0.55, y: -0.31753337}
+      - {x: 0.55, y: -0.31753337}
+  m_UseDelaunayMesh: 0
 --- !u!1 &745378130
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +491,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8159095311175814412, guid: 611e9554852e094438c2fed706498556, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 147731513}
   m_SourcePrefab: {fileID: 100100000, guid: 611e9554852e094438c2fed706498556, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
