@@ -172,7 +172,7 @@ public class Player : MonoBehaviour
             {
                 rb2.gravityScale = 1.0f;
                 Vector2 velocityToContribute = rb.velocity;
-                velocityToContribute.y *= 0.1f;
+                velocityToContribute.y *= 0.25f;
                 rb2.MovePosition((Vector2)boulder.transform.position + velocityToContribute * Time.fixedDeltaTime);
             }
         };

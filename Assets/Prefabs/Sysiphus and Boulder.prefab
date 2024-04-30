@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8938273551867497754}
   m_Layer: 6
   m_Name: Boulder
-  m_TagString: Untagged
+  m_TagString: Boulder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -726,6 +726,7 @@ GameObject:
   - component: {fileID: 4109495249967472408}
   - component: {fileID: 550406822794097021}
   - component: {fileID: 6194298435821603746}
+  - component: {fileID: 3377893790091423310}
   m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
@@ -891,3 +892,51 @@ MonoBehaviour:
   boulder: {fileID: 697937705142668696}
   arrow: {fileID: 4029819465875684853}
   jumpCollider: {fileID: 6329933558574575255}
+--- !u!60 &3377893790091423310
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159095311175814412}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 27ecef6bc5a812f4cb6abe9e3b041080, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.28866667}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 0.6350946}
+      - {x: -0.55, y: -0.31753337}
+      - {x: 0.55, y: -0.31753337}
+  m_UseDelaunayMesh: 0
