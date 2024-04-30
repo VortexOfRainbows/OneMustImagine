@@ -266,6 +266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa8c53f286bff6439b8195f198368f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BreakParticles: {fileID: 1826360503359600219, guid: f323062c0bf0fe34689a615800aae73c, type: 3}
+  RegenParticles: {fileID: 0}
   VelocityToBreak: 12
   VelocityPersistsAfterBreaking: 1
   Renderer: {fileID: 0}
@@ -435,6 +437,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa8c53f286bff6439b8195f198368f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BreakParticles: {fileID: 1826360503359600219, guid: f323062c0bf0fe34689a615800aae73c, type: 3}
+  RegenParticles: {fileID: 0}
   VelocityToBreak: 12
   VelocityPersistsAfterBreaking: 1
   Renderer: {fileID: 0}

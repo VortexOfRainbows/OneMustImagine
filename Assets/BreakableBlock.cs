@@ -5,6 +5,10 @@ using UnityEngine;
 public class BreakableBlock : MonoBehaviour
 {
     [SerializeField]
+    private ParticleSystem BreakParticles;
+    [SerializeField]
+    private ParticleSystem RegenParticles;
+    [SerializeField]
     private float VelocityToBreak = 12;
     [SerializeField]
     private bool VelocityPersistsAfterBreaking = true;
@@ -74,7 +78,7 @@ public class BreakableBlock : MonoBehaviour
     [SerializeField]
     private float CrumbleTime = 7f;
     private bool Dead = false;
-    private bool LastAliveState = false;
+    private bool LastDeadState = false;
     private float ResTimer = 0;
     private float BreakTimer = 0;
     private float PreviousBreakPercent = 0;
@@ -96,12 +100,15 @@ public class BreakableBlock : MonoBehaviour
         {
 
         }
-        if (Dead != LastAliveState)
+        if (Dead != LastDeadState)
         {
-            if (LastAliveState) //If I am now dead, but was alive
+            if (!LastDeadState) //If I am now dead, but was alive
             {
                 //Spawn particles for the platform coming back together
-
+                ParticleSystem module = Instantiate(BreakParticles.gameObject, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+                ParticleSystem.ShapeModule shape = module.shape;
+                shape.scale = transform.localScale;
+                shape.rotation = transform.eulerAngles;
             }
             else //If I am now alive, but was dead
             {
@@ -135,6 +142,6 @@ public class BreakableBlock : MonoBehaviour
             ResTimer = 0;
         }
         Collider.enabled = !Dead;
-        LastAliveState = Dead;
+        LastDeadState = Dead;
     }
 }
