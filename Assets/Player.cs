@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
                 rb.freezeRotation = false;
             float increment = (0.5f + 3.5f * sin) * dir;
             rotation += increment;
-            if (absCounter >= 128 && !InTheAir)
+            if (absCounter >= 125 && !InTheAir)
             {
                 moveCounter = 0;
             }
