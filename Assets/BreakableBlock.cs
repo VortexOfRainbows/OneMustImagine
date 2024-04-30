@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class BreakableBlock : MonoBehaviour
@@ -98,7 +99,7 @@ public class BreakableBlock : MonoBehaviour
         }
         else if(BreakTimer > 0) //If the boulder is currently on top of the platform, some particles should be spawned
         {
-
+            //This behavior is already created below, though
         }
         if (Dead != LastDeadState)
         {
@@ -106,6 +107,8 @@ public class BreakableBlock : MonoBehaviour
             {
                 //Spawn particles for the platform coming back together
                 ParticleSystem module = Instantiate(BreakParticles.gameObject, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+                ParticleSystem.MainModule main = module.main;
+                main.startColor = DefaultColor;
                 ParticleSystem.ShapeModule shape = module.shape;
                 shape.scale = transform.localScale;
                 shape.rotation = transform.eulerAngles;
@@ -122,7 +125,18 @@ public class BreakableBlock : MonoBehaviour
             float PercentBreak = currentBreakPercentage - PreviousBreakPercent;
             if(PercentBreak > 0)
             {
-                //Spawn particles here relative to the change in break. This will effectively make particles spawn if the platform is damaged slightly by the boulder 
+                short count = (short)(100 * PercentBreak + 0.5f);
+                if(count > 0)
+                {
+                    //Spawn particles here relative to the change in break. This will effectively make particles spawn if the platform is damaged slightly by the boulder 
+                    ParticleSystem module = Instantiate(BreakParticles.gameObject, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
+                    ParticleSystem.MainModule main = module.main;
+                    main.startColor = DefaultColor;
+                    ParticleSystem.ShapeModule shape = module.shape;
+                    shape.scale = transform.localScale;
+                    shape.rotation = transform.eulerAngles;
+                    module.emission.SetBurst(0, new ParticleSystem.Burst(0, count));
+                }
             }
         }
         PreviousBreakPercent = BreakTimer / CrumbleTime;
