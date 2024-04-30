@@ -5,7 +5,7 @@ using UnityEngine;
 public class BreakableBlock : MonoBehaviour
 {
     [SerializeField]
-    private float VelocityToBreak = 10;
+    private float VelocityToBreak = 12;
     [SerializeField]
     private bool VelocityPersistsAfterBreaking = true;
     [SerializeField]
@@ -39,10 +39,11 @@ public class BreakableBlock : MonoBehaviour
     {
         if(collision.collider.tag == "Boulder")
         {
-            if (collision.relativeVelocity.magnitude > VelocityToBreak)
+            float breakPercent = collision.relativeVelocity.magnitude / VelocityToBreak;
+            breakPercent = Mathf.Clamp(breakPercent, 0, 1);
+            if (breakPercent >= 1)
             {
-                Dead = true;
-                Collider.enabled = false;
+                BreakEffect();
                 if (VelocityPersistsAfterBreaking)
                 {
                     collision.collider.GetComponent<Rigidbody2D>().velocity = collision.relativeVelocity;
@@ -50,41 +51,74 @@ public class BreakableBlock : MonoBehaviour
             }
             else
             {
+                breakPercent = breakPercent * breakPercent * PartialBreakMultiplier;
+                BreakTimer += breakPercent * CrumbleTime;
                 BreakTimer += Time.deltaTime * 2; //Break slowly if the boulder is colliding but not high enough speed
+                if (BreakTimer > CrumbleTime)
+                {
+                    BreakEffect();
+                    if (VelocityPersistsAfterBreaking)
+                    {
+                        collision.collider.GetComponent<Rigidbody2D>().velocity = collision.relativeVelocity;
+                    }
+                }
             }
         }
     }
+    [SerializeField]
+    private float PartialBreakMultiplier = 0.2f;
     [SerializeField]
     private bool Respawnable = true;
     [SerializeField]
     private float RespawnTime = 4f;
     [SerializeField]
-    private float CrumbleTime = 5f;
+    private float CrumbleTime = 6f;
     private bool Dead = false;
     private bool LastAliveState = false;
     private float ResTimer = 0;
     private float BreakTimer = 0;
+    private float PreviousBreakPercent = 0;
+    private void BreakEffect()
+    {
+        Dead = true;
+        Collider.enabled = false;
+        BreakTimer = 0;
+    }
     private void Update()
     {
         BreakTimer -= Time.deltaTime;
         BreakTimer = Mathf.Max(BreakTimer, 0);
         if (BreakTimer > CrumbleTime)
         {
-            Dead = true;
-            Collider.enabled = false;
-            BreakTimer = 0;
+            BreakEffect();
         }
-        if(Dead != LastAliveState)
+        else if(BreakTimer > 0) //If the boulder is currently on top of the platform, some particles should be spawned
         {
-            if(LastAliveState) //If I am now dead, but was alive
+
+        }
+        if (Dead != LastAliveState)
+        {
+            if (LastAliveState) //If I am now dead, but was alive
             {
+                //Spawn particles for the platform coming back together
 
             }
             else //If I am now alive, but was dead
             {
+                //Spawn particles for the platform breaking
 
             }
         }
+        float currentBreakPercentage = (BreakTimer / CrumbleTime);
+        if (PreviousBreakPercent != currentBreakPercentage)
+        {
+            float PercentBreak = currentBreakPercentage - PreviousBreakPercent;
+            if(PercentBreak > 0)
+            {
+                //Spawn particles here relative to the change in break. This will effectively make particles spawn if the platform is damaged slightly by the boulder 
+            }
+        }
+        PreviousBreakPercent = BreakTimer / CrumbleTime;
         if(Dead)
         {
             if(Respawnable)
@@ -93,11 +127,11 @@ public class BreakableBlock : MonoBehaviour
             {
                 Dead = false;
             }
-            Renderer.color = DeadColor;
+            Renderer.color = Color.Lerp(DefaultColor, DeadColor, 1f - 0.6f * ResTimer / RespawnTime);
         }
         else
         {
-            Renderer.color = DefaultColor;
+            Renderer.color = Color.Lerp(DeadColor, DefaultColor, 1f - 0.6f * BreakTimer / CrumbleTime);
             ResTimer = 0;
         }
         Collider.enabled = !Dead;

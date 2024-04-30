@@ -266,13 +266,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa8c53f286bff6439b8195f198368f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VelocityToBreak: 10
+  VelocityToBreak: 12
   VelocityPersistsAfterBreaking: 1
   Renderer: {fileID: 0}
   Collider: {fileID: 0}
+  PartialBreakMultiplier: 0.2
   Respawnable: 1
   RespawnTime: 4
-  CrumbleTime: 5
+  CrumbleTime: 6
 --- !u!1 &745378130
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,6 +439,7 @@ MonoBehaviour:
   VelocityPersistsAfterBreaking: 1
   Renderer: {fileID: 0}
   Collider: {fileID: 0}
+  PartialBreakMultiplier: 0.3
   Respawnable: 1
   RespawnTime: 4
   CrumbleTime: 5
