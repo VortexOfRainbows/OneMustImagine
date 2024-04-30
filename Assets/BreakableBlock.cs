@@ -105,7 +105,7 @@ public class BreakableBlock : MonoBehaviour
         {
             if (!LastDeadState) //If I am now dead, but was alive
             {
-                //Spawn particles for the platform coming back together
+                //Spawn particles for the platform breaking
                 ParticleSystem module = Instantiate(BreakParticles.gameObject, transform.position, Quaternion.identity).GetComponent<ParticleSystem>();
                 ParticleSystem.MainModule main = module.main;
                 main.startColor = DefaultColor;
@@ -113,12 +113,8 @@ public class BreakableBlock : MonoBehaviour
                 shape.scale = transform.localScale;
                 shape.rotation = transform.eulerAngles;
             }
-            else //If I am now alive, but was dead
-            {
-                //Spawn particles for the platform breaking
-
-            }
         }
+        LastDeadState = Dead;
         float currentBreakPercentage = (BreakTimer / CrumbleTime);
         if (PreviousBreakPercent != currentBreakPercentage)
         {
@@ -143,19 +139,31 @@ public class BreakableBlock : MonoBehaviour
         if(Dead)
         {
             if(Respawnable)
+            {
+                bool wasBelow = ResTimer < RespawnTime - 0.2f;
                 ResTimer += Time.deltaTime;
+                bool nowAbove = ResTimer >= RespawnTime - 0.2f;
+                if(wasBelow && nowAbove)
+                {
+                    ParticleSystem module = Instantiate(RegenParticles.gameObject, transform.position + new Vector3(0, 0, -3), Quaternion.identity).GetComponent<ParticleSystem>();
+                    ParticleSystem.MainModule main = module.main;
+                    main.startColor = DefaultColor;
+                    ParticleSystem.ShapeModule shape = module.shape;
+                    shape.scale = transform.localScale;
+                    shape.rotation = transform.eulerAngles;
+                }
+            }
             if(ResTimer >= RespawnTime)
             {
                 Dead = false;
             }
-            Renderer.color = Color.Lerp(DefaultColor, DeadColor, 1f - 0.6f * ResTimer / RespawnTime);
+            Renderer.color = Color.Lerp(DefaultColor, DeadColor, 1f - 0.2f * ResTimer / RespawnTime);
         }
         else
         {
-            Renderer.color = Color.Lerp(DeadColor, DefaultColor, 1f - 0.6f * BreakTimer / CrumbleTime);
+            Renderer.color = Color.Lerp(DeadColor, DefaultColor, 1f - 0.5f * BreakTimer / CrumbleTime);
             ResTimer = 0;
         }
         Collider.enabled = !Dead;
-        LastDeadState = Dead;
     }
 }

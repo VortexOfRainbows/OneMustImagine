@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BreakParticles: {fileID: 1826360503359600219, guid: f323062c0bf0fe34689a615800aae73c, type: 3}
-  RegenParticles: {fileID: 0}
+  RegenParticles: {fileID: 4897424669129012247, guid: 4bc127cb5d9a12342967d2052c2ef83f, type: 3}
   VelocityToBreak: 12
   VelocityPersistsAfterBreaking: 1
   Renderer: {fileID: 0}
@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BreakParticles: {fileID: 1826360503359600219, guid: f323062c0bf0fe34689a615800aae73c, type: 3}
-  RegenParticles: {fileID: 0}
+  RegenParticles: {fileID: 4897424669129012247, guid: 4bc127cb5d9a12342967d2052c2ef83f, type: 3}
   VelocityToBreak: 12
   VelocityPersistsAfterBreaking: 1
   Renderer: {fileID: 0}
@@ -700,6 +700,10 @@ PrefabInstance:
     - target: {fileID: 2210854662360384181, guid: 611e9554852e094438c2fed706498556, type: 3}
       propertyPath: m_Name
       value: Sysiphus and Boulder
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639875032590276582, guid: 611e9554852e094438c2fed706498556, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5812824220081212481, guid: 611e9554852e094438c2fed706498556, type: 3}
       propertyPath: m_LocalPosition.x
