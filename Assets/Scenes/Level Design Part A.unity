@@ -7099,18 +7099,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sysiphus and Boulder
       objectReference: {fileID: 0}
-    - target: {fileID: 3099314668136561267, guid: 611e9554852e094438c2fed706498556, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4639875032590276582, guid: 611e9554852e094438c2fed706498556, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -119.93
-      objectReference: {fileID: 0}
-    - target: {fileID: 4639875032590276582, guid: 611e9554852e094438c2fed706498556, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -51.6
-      objectReference: {fileID: 0}
     - target: {fileID: 5812824220081212481, guid: 611e9554852e094438c2fed706498556, type: 3}
       propertyPath: m_LocalPosition.x
       value: 13.5
@@ -7150,34 +7138,6 @@ PrefabInstance:
     - target: {fileID: 5812824220081212481, guid: 611e9554852e094438c2fed706498556, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6194298435821603746, guid: 611e9554852e094438c2fed706498556, type: 3}
-      propertyPath: mainCamera
-      value: 
-      objectReference: {fileID: 1534675947}
-    - target: {fileID: 7296984648397111511, guid: 611e9554852e094438c2fed706498556, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -119.93
-      objectReference: {fileID: 0}
-    - target: {fileID: 7296984648397111511, guid: 611e9554852e094438c2fed706498556, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -49.44
-      objectReference: {fileID: 0}
-    - target: {fileID: 7347536835471880553, guid: 611e9554852e094438c2fed706498556, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -128.02
-      objectReference: {fileID: 0}
-    - target: {fileID: 7347536835471880553, guid: 611e9554852e094438c2fed706498556, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -52.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 9129004511946799816, guid: 611e9554852e094438c2fed706498556, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 18.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9129004511946799816, guid: 611e9554852e094438c2fed706498556, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9271,11 +9231,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!20 &1534675947 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6188699755856956324, guid: 611e9554852e094438c2fed706498556, type: 3}
-  m_PrefabInstance: {fileID: 1128908701}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1539806091
 PrefabInstance:
   m_ObjectHideFlags: 0
