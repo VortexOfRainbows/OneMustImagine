@@ -115,14 +115,14 @@ public class Player : MonoBehaviour
                 sin = 1;
             if (sin < 0)
                 sin = 0;
-            velocity.x = sin * dir * -3.6f;
+            velocity.x = sin * dir * -4.25f;
             if(absCounter < 90)
                 rb.freezeRotation = true;
             else
                 rb.freezeRotation = false;
-            float increment = (0.5f + 3.5f * sin) * dir;
+            float increment = (0.5f + 3.75f * sin) * dir;
             rotation += increment;
-            if (absCounter >= 125 && !InTheAir)
+            if (absCounter >= 122 && !InTheAir)
             {
                 moveCounter = 0;
             }
