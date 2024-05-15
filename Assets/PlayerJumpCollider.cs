@@ -15,8 +15,8 @@ public class PlayerJumpCollider : MonoBehaviour
     }
     private void OnTrigger2D(Collider2D collision)
     {
-        //if(collision.CompareTag("Platform"))
-        player.RefreshJump();
+        if (!collision.CompareTag("Wind"))
+            player.RefreshJump();
     }
     private void Update()
     {

@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
         Vector2 lerp = Vector2.Lerp(mainCamera.transform.position, transform.position, 0.8f);
         mainCamera.transform.position = new Vector3(lerp.x, lerp.y, mainCamera.transform.position.z);
     }
-    private bool InTheAir => !touchingGround && !touchingWall;
+    public bool InTheAir => !touchingGround && !touchingWall;
     private float moveCounter = 0;
     //private bool JustJumped = false;
     private bool canJump = true;
@@ -37,12 +37,12 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!touchingGround)
+        if (!touchingGround && !collision.CompareTag("Wind"))
             touchingWall = true;
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!touchingGround)
+        if (!touchingGround && !collision.CompareTag("Wind"))
             touchingWall = true;
     }
     public void RefreshJump()
