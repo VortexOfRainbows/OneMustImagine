@@ -7,11 +7,12 @@ TagManager:
   - JumpCollider
   - Breakable
   - Boulder
+  - Wind
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wind
   - Water
   - UI
   - Boulder

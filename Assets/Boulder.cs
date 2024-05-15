@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boulder : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private bool touchingGround = false;
+    public bool touchingGround = false;
     private void OnCollisionStay2D(Collision2D collision)
     {
         touchingGround = true;
@@ -37,6 +37,7 @@ public class Boulder : MonoBehaviour
         }
         rb.gravityScale = Mathf.Min(rb.gravityScale, 10);
         rb.velocity = velocity;
+        rb.rotation -= velocity.x * 0.5f;
         touchingGround = false;
     }
 }
