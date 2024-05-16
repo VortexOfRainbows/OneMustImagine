@@ -48,7 +48,10 @@ public class BreakableBlock : MonoBehaviour
             breakPercent = Mathf.Clamp(breakPercent, 0, 1);
             if (breakPercent >= 1)
             {
-                BreakEffect();
+                if(!Player.BoulderJustThrown)
+                {
+                    BreakEffect();
+                }
                 if (VelocityPersistsAfterBreaking)
                 {
                     collision.collider.GetComponent<Rigidbody2D>().velocity = collision.relativeVelocity;
@@ -61,7 +64,10 @@ public class BreakableBlock : MonoBehaviour
                 BreakTimer += Time.deltaTime * 2; //Break slowly if the boulder is colliding but not high enough speed
                 if (BreakTimer > CrumbleTime)
                 {
-                    BreakEffect();
+                    if (!Player.BoulderJustThrown)
+                    {
+                        BreakEffect();
+                    }
                     if (VelocityPersistsAfterBreaking)
                     {
                         collision.collider.GetComponent<Rigidbody2D>().velocity = collision.relativeVelocity;

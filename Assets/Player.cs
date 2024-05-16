@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private bool touchingWall = false;
     private float jumpDegrees = 0;
     private float justLaunchedBoulder = 0;
+    public static bool BoulderJustThrown { get; private set; }
     private void OnCollisionStay2D(Collision2D collision)
     {
         if(!touchingGround)
@@ -144,6 +145,7 @@ public class Player : MonoBehaviour
             rb.gravityScale = 2;
         }
         arrow.SetActive(false);
+        BoulderJustThrown = false;
         if (Vector2.Distance(transform.position, boulder.transform.position) < 1.1f)
         {
             Rigidbody2D rb2 = boulder.GetComponent<Rigidbody2D>();
@@ -160,6 +162,7 @@ public class Player : MonoBehaviour
                     rb2.velocity *= 0.1f;
                     rb2.velocity += toMouse.normalized * scale * 6.1f;
                     justLaunchedBoulder = 100;
+                    BoulderJustThrown = true;
                 }
                 else
                 {
@@ -171,6 +174,7 @@ public class Player : MonoBehaviour
             }
             if (justLaunchedBoulder <= 0 && Input.GetMouseButton(1) && !releaseMouse && Vector2.Distance(transform.position, boulder.transform.position) < 1.05f)
             {
+                BoulderJustThrown = true;
                 rb2.gravityScale = 1.0f;
                 Vector2 velocityToContribute = rb.velocity;
                 velocityToContribute.y *= InTheAir ? 0.0f : 1.0f;
