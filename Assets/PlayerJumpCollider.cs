@@ -15,7 +15,7 @@ public class PlayerJumpCollider : MonoBehaviour
     }
     private void OnTrigger2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Wind"))
+        if (!collision.CompareTag("Wind") && !collision.CompareTag("Ice"))
             player.RefreshJump();
     }
     private void Update()

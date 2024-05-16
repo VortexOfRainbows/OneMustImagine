@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     private bool canJump = true;
     private bool touchingGround = false;
     private bool touchingWall = false;
+    private bool touchingIce = false;
     private float jumpDegrees = 0;
     private float justLaunchedBoulder = 0;
     public static bool BoulderJustThrown { get; private set; }
@@ -38,11 +39,19 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Ice"))
+        {
+            touchingIce = true;
+        }
         if (!touchingGround && !collision.CompareTag("Wind"))
             touchingWall = true;
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
+        if (collision.CompareTag("Ice"))
+        {
+            touchingIce = true;
+        }
         if (!touchingGround && !collision.CompareTag("Wind"))
             touchingWall = true;
     }
@@ -56,13 +65,21 @@ public class Player : MonoBehaviour
         touchingGround = true;
     }
     private bool lastMouseState;
+    private float totalMoveDebug = 0;
     private void FixedUpdate()
     {
         Vector2 velocity = rb.velocity;
         float rotation = rb.rotation;
         if (touchingGround)
         {
-            velocity.x *= 0.9f;
+            if(touchingIce)
+            {
+                velocity.x *= 0.9965f;
+            }
+            else
+            {
+                velocity.x *= 0.9f;
+            }
         }
         else
         {
@@ -116,8 +133,30 @@ public class Player : MonoBehaviour
                 sin = 1;
             if (sin < 0)
                 sin = 0;
-            velocity.x = sin * dir * -4.25f;
-            if(absCounter < 90)
+            //velocity.x = sin * dir * -4.25f;
+            if (touchingGround)
+            {
+                if (touchingIce)
+                {
+                    velocity.x *= 0.9875f;
+                }
+                else
+                {
+                    velocity.x *= 0.9f;
+                }
+            }
+            else
+            {
+                velocity.x *= 0.94f;
+                canJump = false;
+            }
+            float maxSpeed = Mathf.Abs(sin * dir * -6.4f);
+            if (Mathf.Abs(velocity.x) < maxSpeed) //-104.5728 is the speed avg over the movement time
+            {
+                velocity.x += sin * dir * -0.575f;
+            }
+            totalMoveDebug += velocity.x;
+            if (absCounter < 90)
                 rb.freezeRotation = true;
             else
                 rb.freezeRotation = false;
@@ -131,9 +170,11 @@ public class Player : MonoBehaviour
             {
                 moveCounter += increment;
             }
+            Debug.Log(totalMoveDebug);
         }
         else
-        { 
+        {
+            totalMoveDebug = 0;
             rb.freezeRotation = false; 
         }
         if (rb.velocity.y < 0)
@@ -185,7 +226,7 @@ public class Player : MonoBehaviour
         justLaunchedBoulder--;
         rb.velocity = velocity;
         rb.rotation = rotation;
-        touchingGround = touchingWall = false;
+        touchingGround = touchingWall = touchingIce = false;
         lastMouseState = Input.GetMouseButton(0);
     }
 }
