@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
         {
             if(touchingIce)
             {
-                velocity.x *= 0.9965f;
+                velocity.x *= 0.9995f;
             }
             else
             {
