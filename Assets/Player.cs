@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         Vector2 lerp = Vector2.Lerp(mainCamera.transform.position, transform.position, 0.8f);
-        mainCamera.transform.position = new Vector3(lerp.x, lerp.y, mainCamera.transform.position.z);
+        mainCamera.transform.position = new Vector3(lerp.x, lerp.y + 2.5f, mainCamera.transform.position.z);
     }
     public bool InTheAir => !touchingGround && !touchingWall;
     private float moveCounter = 0;

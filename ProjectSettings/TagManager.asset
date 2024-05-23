@@ -18,8 +18,8 @@ TagManager:
   - UI
   - Boulder
   - Player
-  - 
-  - 
+  - Overlay
+  - PostProcessing
   - 
   - 
   - 
@@ -43,9 +43,30 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 4228181275
+    locked: 0
+  - name: backdrop
+    uniqueID: 3520253879
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Boulder
     uniqueID: 2716426189
+    locked: 0
+  - name: Entities
+    uniqueID: 4287400717
+    locked: 0
+  - name: platforms
+    uniqueID: 3521318567
+    locked: 0
+  - name: foreground
+    uniqueID: 366272415
+    locked: 0
+  - name: Overlay
+    uniqueID: 3516784587
+    locked: 0
+  - name: front
+    uniqueID: 1119436645
     locked: 0
