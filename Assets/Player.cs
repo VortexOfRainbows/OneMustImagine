@@ -20,7 +20,8 @@ public class Player : MonoBehaviour
     public bool InTheAir => !touchingGround && !touchingWall;
     private float moveCounter = 0;
     //private bool JustJumped = false;
-    private bool canJump = true;
+    private bool CanJump => canJumpTimer > 0;
+    private int canJumpTimer = 0;
     private bool touchingGround = false;
     private bool touchingWall = false;
     private bool touchingIce = false;
@@ -59,7 +60,7 @@ public class Player : MonoBehaviour
     {
         if (rb.velocity.y <= 0)
         {
-            canJump = true;
+            canJumpTimer = 60;
             rb.angularVelocity *= 0.0f;
         }
         touchingGround = true;
@@ -84,14 +85,14 @@ public class Player : MonoBehaviour
         else
         {
             velocity.x *= 0.95f;
-            canJump = false;
+            canJumpTimer--;
         }
         if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Space))
         {
-            if (canJump && touchingGround)
+            if (CanJump && (touchingGround || canJumpTimer > 0))
             {
                 //JustJumped = true;
-                canJump = false;
+                canJumpTimer = 0;
                 velocity *= 0.2f;
                 velocity += new Vector2(0, 10).RotatedBy(jumpDegrees);
             }
@@ -148,7 +149,7 @@ public class Player : MonoBehaviour
             else
             {
                 velocity.x *= 0.94f;
-                canJump = false;
+                canJumpTimer--;
             }
             float maxSpeed = Mathf.Abs(sin * dir * -6.4f);
             if (Mathf.Abs(velocity.x) < maxSpeed) //-104.5728 is the speed avg over the movement time
