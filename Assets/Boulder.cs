@@ -7,6 +7,7 @@ public class Boulder : MonoBehaviour
     private Rigidbody2D rb;
     public bool touchingGround = false;
     private bool touchingIce = false;
+    public AudioSource audioSource;
     private void OnCollisionStay2D(Collision2D collision)
     {
         touchingGround = true;
@@ -14,6 +15,7 @@ public class Boulder : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         touchingGround = true;
+        audioSource.Play(0);
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -25,6 +27,7 @@ public class Boulder : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
     private void FixedUpdate()
     {
