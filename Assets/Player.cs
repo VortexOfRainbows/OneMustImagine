@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static Camera MainCamera;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject boulder;
     [SerializeField] private GameObject arrow;
@@ -16,6 +17,10 @@ public class Player : MonoBehaviour
     {
         Vector2 lerp = Vector2.Lerp(mainCamera.transform.position, transform.position, 0.8f);
         mainCamera.transform.position = new Vector3(lerp.x, lerp.y + 2.5f, mainCamera.transform.position.z);
+        if(mainCamera != null)
+        {
+            Player.MainCamera = mainCamera;
+        }
     }
     public bool InTheAir => !touchingGround && !touchingWall;
     private float moveCounter = 0;

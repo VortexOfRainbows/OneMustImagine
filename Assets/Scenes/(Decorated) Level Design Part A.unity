@@ -12629,6 +12629,7 @@ GameObject:
   m_Component:
   - component: {fileID: 593556191}
   - component: {fileID: 593556190}
+  - component: {fileID: 593556192}
   m_Layer: 0
   m_Name: rockb
   m_TagString: Untagged
@@ -12703,6 +12704,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 4.459}
+--- !u!114 &593556192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593556189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d70c54f4460c2048b81e6498677a6fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParallaxAmt: 0.5
 --- !u!1001 &594732185
 PrefabInstance:
   m_ObjectHideFlags: 0
