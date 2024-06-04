@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject boulder;
     [SerializeField] private GameObject arrow;
     [SerializeField] private GameObject jumpCollider;
+    [SerializeField] private Canvas UICanvas;
     private Rigidbody2D rb;
     void Start()
     {
@@ -60,6 +61,11 @@ public class Player : MonoBehaviour
         }
         if (!touchingGround && !collision.CompareTag("Wind"))
             touchingWall = true;
+        if (collision.CompareTag("GameEnd"))
+        {
+            UICanvas.gameObject.SetActive(true);
+            Time.timeScale = 0.5f;
+        }
     }
     public void RefreshJump()
     {

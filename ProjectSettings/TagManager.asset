@@ -9,6 +9,7 @@ TagManager:
   - Boulder
   - Wind
   - Ice
+  - GameEnd
   layers:
   - Default
   - TransparentFX
