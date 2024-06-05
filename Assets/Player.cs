@@ -1,5 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -8,14 +8,25 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject boulder;
     [SerializeField] private GameObject arrow;
     [SerializeField] private GameObject jumpCollider;
-    [SerializeField] private Canvas UICanvas;
+    [SerializeField] private GameObject UICanvas;
+    [SerializeField] private Text HeightText;
     private Rigidbody2D rb;
+    private float StartingHeight = -36.74f;
+    private float CurrentHeight = -36.74f;
+    private float FinalHeight = 68.77f;
+    private float HeightPercent => (CurrentHeight - StartingHeight) / (FinalHeight - StartingHeight);
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
     void Update()
     {
+        HeightText.text = (HeightPercent * 100f).ToString("##");
+        if(HeightText.text == string.Empty)
+        {
+            HeightText.text += "0";
+        }
+        HeightText.text += " m";
         Vector2 lerp = Vector2.Lerp(mainCamera.transform.position, transform.position, 0.8f);
         mainCamera.transform.position = new Vector3(lerp.x, lerp.y + 2.5f, mainCamera.transform.position.z);
         if(mainCamera != null)
@@ -240,5 +251,12 @@ public class Player : MonoBehaviour
         rb.rotation = rotation;
         touchingGround = touchingWall = touchingIce = false;
         lastMouseState = Input.GetMouseButton(0);
+        
+        if(boulder.GetComponent<Boulder>().WasTouchingGround)
+        {
+            CurrentHeight = boulder.transform.localPosition.y;
+            if (CurrentHeight > FinalHeight)
+                CurrentHeight = FinalHeight;
+        }
     }
 }

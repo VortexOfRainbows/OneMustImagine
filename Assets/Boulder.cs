@@ -5,6 +5,7 @@ using UnityEngine;
 public class Boulder : MonoBehaviour
 {
     private Rigidbody2D rb;
+    public bool WasTouchingGround = false;
     public bool touchingGround = false;
     private bool touchingIce = false;
     public AudioSource audioSource;
@@ -54,6 +55,7 @@ public class Boulder : MonoBehaviour
         rb.gravityScale = Mathf.Min(rb.gravityScale, 10);
         rb.velocity = velocity;
         rb.rotation -= velocity.x * 0.5f;
+        WasTouchingGround = touchingGround;
         touchingGround = touchingIce = false;
     }
 }
