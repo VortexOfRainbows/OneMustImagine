@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Level Design Part A.unity
     guid: c1ab78549b63b80449f1f47a52be473c
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: c57c036abd020fc4ebfa9dba6dd8b46e
+  - enabled: 1
     path: Assets/Scenes/(Decorated) Level Design Part A.unity
     guid: fcd603b6fa301ae4baa1219ca37daaa5
   m_configObjects: {}
