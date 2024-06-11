@@ -12,9 +12,9 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject UICanvas;
     [SerializeField] private Text HeightText;
     private Rigidbody2D rb;
-    private float StartingHeight = -36.74f;
-    private float CurrentHeight = -36.74f;
-    private float FinalHeight = 68.77f;
+    private float StartingHeight = 0.75f;
+    private float CurrentHeight = 0.75f;
+    private float FinalHeight = 105.9f;
     private float HeightPercent => (CurrentHeight - StartingHeight) / (FinalHeight - StartingHeight);
     void Start()
     {
