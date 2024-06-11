@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public static Camera MainCamera;
+    public static bool HasWon = false;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private GameObject boulder;
     [SerializeField] private GameObject arrow;
@@ -74,9 +75,14 @@ public class Player : MonoBehaviour
             touchingWall = true;
         if (collision.CompareTag("GameEnd"))
         {
-            UICanvas.gameObject.SetActive(true);
-            Time.timeScale = 0.5f;
+            EndGame();
         }
+    }
+    private void EndGame()
+    {
+        HasWon = true;
+        UICanvas.gameObject.SetActive(true);
+        Time.timeScale = 0.5f;
     }
     public void RefreshJump()
     {
@@ -193,7 +199,7 @@ public class Player : MonoBehaviour
             {
                 moveCounter += increment;
             }
-            Debug.Log(totalMoveDebug);
+            //Debug.Log(totalMoveDebug);
         }
         else
         {
