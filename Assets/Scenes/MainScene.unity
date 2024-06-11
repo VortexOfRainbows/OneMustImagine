@@ -23987,13 +23987,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sysiphus and Boulder
       objectReference: {fileID: 0}
+    - target: {fileID: 3341108686706744966, guid: 611e9554852e094438c2fed706498556, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3341108686706744966, guid: 611e9554852e094438c2fed706498556, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -7566579
+      objectReference: {fileID: 0}
     - target: {fileID: 4639875032590276582, guid: 611e9554852e094438c2fed706498556, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.3
       objectReference: {fileID: 0}
     - target: {fileID: 4639875032590276582, guid: 611e9554852e094438c2fed706498556, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5812824220081212481, guid: 611e9554852e094438c2fed706498556, type: 3}
       propertyPath: m_LocalPosition.x

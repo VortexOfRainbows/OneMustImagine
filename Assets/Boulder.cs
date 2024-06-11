@@ -16,6 +16,11 @@ public class Boulder : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         touchingGround = true;
+        if(collision.relativeVelocity.sqrMagnitude < 20)
+        {
+            return; //Don't play audio if the impact velocity was minimal
+        }
+        audioSource.volume = Mathf.Clamp(Mathf.Sqrt(collision.relativeVelocity.magnitude) / 11f, 0, 1); //Scale sound based on impact velocity
         audioSource.Play(0);
     }
     private void OnTriggerStay2D(Collider2D collision)
