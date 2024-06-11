@@ -131,15 +131,25 @@ public class Player : MonoBehaviour
         {
             if(moveCounter == 0 && (touchingGround || !touchingWall))
                 moveCounter = 0.1f;
+            else
+            {
+                velocity.x -= 0.0001f;
+                rotation -= 0.0001f;
+            }
         }
-        if (Input.GetKey(KeyCode.S))
-        {
+        //if (Input.GetKey(KeyCode.S))
+        //{
 
-        }
+        //}
         if (moveRight)
         {
             if (moveCounter == 0 && (touchingGround || !touchingWall))
                 moveCounter = -0.1f;
+            else
+            {
+                velocity.x += 0.0001f;
+                rotation += 0.0001f;
+            }
         }
         if(InTheAir)
         {
