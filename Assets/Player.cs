@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
         {
             touchingIce = true;
         }
-        if (!touchingGround && !collision.CompareTag("Wind"))
+        if (!touchingGround && !collision.CompareTag("Wind") && !collision.CompareTag("GameEnd"))
             touchingWall = true;
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
         {
             touchingIce = true;
         }
-        if (!touchingGround && !collision.CompareTag("Wind"))
+        if (!touchingGround && !collision.CompareTag("Wind") && !collision.CompareTag("GameEnd"))
             touchingWall = true;
         if (collision.CompareTag("GameEnd"))
         {
